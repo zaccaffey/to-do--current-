@@ -34,8 +34,9 @@ const Home = () => {
     const [todos, setTodos] = useState(initialList)
     const [newTitle, setNewTitle] = useState('')
     const [newDescription, setNewDescription] = useState('')
-   // const [newDueDate, setNewDueDate] = useState('')
+    const [newDueDate, setNewDueDate] = useState('')
     const [myId, setMyId] = useState('')
+    const [myObject, setMyObject] = useState('')
 
     const titleChangeHandler = (event) => {
         setNewTitle(event.target.value)
@@ -45,9 +46,10 @@ const Home = () => {
         setNewDescription(event.target.value)
     }
 
-    // const dateChangeHandler = (event) => {
-    //     setNewDueDate(event.target.value)
-    // }
+    const dateChangeHandler = (event) => {
+        setNewDueDate(event.target.value)
+        console.log(newDueDate)
+    }
 
     const addTodoHandler = (todo) => {
         setTodos((prevList) => {
@@ -83,12 +85,15 @@ const Home = () => {
         let index = newList.indexOf(item)
         newList[index].title = newTitle
         newList[index].description = newDescription
-        //newList[index].date = newDueDate
+        newList[index].date = newDueDate
         setTodos(newList)
         setOpen(false) 
     }
 
     const getId = (id) => {
+        let newList = [...todos]
+        let item = newList.find(element => element.id === id)
+        setMyObject(item)
         setMyId(id)
     }
 
@@ -107,11 +112,13 @@ const Home = () => {
                             <form onSubmit={submitHandler}>
                                 <div>
                                     <DialogContentText>Title</DialogContentText>
-                                    <input type="text" value={newTitle} onChange={titleChangeHandler}></input>
+                                    <input type="text" value={newTitle} onChange={titleChangeHandler} placeholder={myObject.title}></input>
+                                   
                                     <DialogContentText>Description</DialogContentText>
-                                    <input type="text" value={newDescription} onChange={descriptionChangeHandler}></input>
-                                    {/* <DialogContentText>Due Date</DialogContentText>
-                                    <input type="date" value={newDueDate} onChange={dateChangeHandler}></input> */}
+                                    <textarea type="text" value={newDescription} onChange={descriptionChangeHandler} placeholder={myObject.description}></textarea>
+    
+                                    <DialogContentText>Due Date</DialogContentText>
+                                    <textarea type="text" value={newDueDate} onChange={dateChangeHandler} placeholder={myObject.date}></textarea>
                                 </div>
                                 <div>
                                     <button type="submit">Submit</button>
