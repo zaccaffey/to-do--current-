@@ -88,6 +88,9 @@ const Home = () => {
         newList[index].date = newDueDate
         setTodos(newList)
         setOpen(false) 
+        setNewTitle('')
+        setNewDescription('')
+        setNewDueDate('')
     }
 
     const getId = (id) => {
