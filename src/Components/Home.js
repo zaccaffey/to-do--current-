@@ -92,6 +92,7 @@ const Home = () => {
         let id = myId
         let item = newList.find(element => element.id === id)
         let index = newList.indexOf(item)
+
         newList[index].title = newTitle
         newList[index].description = newDescription
         newList[index].date = newDueDate
@@ -108,6 +109,11 @@ const Home = () => {
         let item = newList.find(element => element.id === id)
         setMyObject(item)
         setMyId(id)
+
+        setNewTitle(item.title)
+        setNewDescription(item.description)
+        setNewDueDate(item.date)
+        setNewPriority(item.priority)
     }
 
     return (
@@ -125,7 +131,7 @@ const Home = () => {
                             <form onSubmit={submitHandler}>
                                 <div>
                                     <DialogContentText>Title</DialogContentText>
-                                    <input type="text" value={newTitle} onChange={titleChangeHandler} placeholder={myObject.title}></input>
+                                    <input type="text" value={newTitle} onChange={titleChangeHandler} placeholder={myObject.title} on></input>
                                    
                                     <DialogContentText>Description</DialogContentText>
                                     <textarea type="text" value={newDescription} onChange={descriptionChangeHandler} placeholder={myObject.description}></textarea>
