@@ -1,5 +1,4 @@
 import { Card } from "react-bootstrap"
-import React, { useState } from "react"
 import DateWidget from "../DateWidget"
 import './TodoItem.css'
 import './Button.css'

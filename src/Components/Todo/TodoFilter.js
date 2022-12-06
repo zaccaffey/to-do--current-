@@ -5,7 +5,7 @@ const TodoFilter = (props) => {
     const handleSelectedFilter = (event) => {
         let index = event.nativeEvent.target.selectedIndex;
         let selected = event.nativeEvent.target[index].text
-        props.handleSelectedFilter(selected)
+        props.onChangeFilter(selected)
         console.log(selected)
     }
 

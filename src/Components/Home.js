@@ -10,29 +10,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import './Todo/TodoItem.css'
 
-const initialList = [
-    {
-        title: "Clean the car",
-        description: "I need to vaccum my car before 5 pm.",
-        date: new Date("12/13/2022"),
-        id: Math.random().toString(),
-        priority: "High"
-    },
-    {
-        title: "Wash the dog",
-        description: "I need to give Indy a bath before the end of the day.",
-        date: new Date("1/13/2023"),
-        id: Math.random().toString(),
-        priority: "Medium"
-    },
-    {
-        title: "Grocery Shopping",
-        description: "I need to pickup milk.",
-        date: new Date("1/03/2023"),
-        id: Math.random().toString(),
-        priority: "Low"
-    },
-]
+const initialList = []
+
 const Home = () => {
 
     const [todos, setTodos] = useState(initialList)
