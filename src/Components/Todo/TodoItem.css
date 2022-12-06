@@ -50,11 +50,17 @@
     left: 70%;
     top: 60%;
   }
+
+  .button {
+    border-radius: 10px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  }
   
   .card {
     margin: 20px;
     padding: 20px;
     width: 500px;
+    height: 250px;
     min-height: 200px;
     display: grid;
     grid-template-rows: 20px 50px 1fr 50px;
@@ -150,4 +156,16 @@
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .card-high {
+    background: radial-gradient(#fd1111, #b68282);
+  }
+
+  .card-med {
+    background: radial-gradient(#ff7b00, #b89075);
+  }
+
+  .card-low {
+    background: radial-gradient(#ffee00, #bbba93);
   }

@@ -2,6 +2,7 @@ import { Card } from "react-bootstrap"
 import React, { useState } from "react"
 import DateWidget from "../DateWidget"
 import './TodoItem.css'
+import './Button.css'
 
 const TodoItem = (props) => {
 
@@ -21,8 +22,8 @@ const TodoItem = (props) => {
                 <p>{props.item.description}</p>
                 <DateWidget date={props.item.date}></DateWidget>
                 <p>Priority: {props.item.priority}</p>
-                <button onClick={deleteHandler}>Delete</button>
-                <button onClick={editClickHandler}>Edit</button>
+                    <button className="button-29" onClick={deleteHandler}>Done</button>
+                    <button className="button-29" onClick={editClickHandler}>Edit</button>
             </div>
         </Card>
     )

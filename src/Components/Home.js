@@ -122,7 +122,7 @@ const Home = () => {
                 <Col>
                     <h1>To-Do List</h1>
                     <div>
-                        <NewTodo onAddTodo={addTodoHandler} />
+                        <NewTodo onAddTodo={addTodoHandler}/>
                         <TodoList list={todos} onRemoveTodo={removeTodo} editClickToOpen={handleClickToOpen} getId={getId}></TodoList>
                     </div>
                     <Dialog open={open} onClose={handleToClose}>

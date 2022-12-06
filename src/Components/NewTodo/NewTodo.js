@@ -11,7 +11,7 @@ const NewTodo = (props) => {
     }
     return (
         <div className='new-todo'>
-            <TodoForm onSaveTodo={saveTodoHandler}/>
+            <TodoForm onSaveTodo={saveTodoHandler} />
         </div>
     )
 }

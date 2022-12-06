@@ -1,13 +1,23 @@
 import './TodoForm.css'
 import React, { useState } from "react"
 const TodoForm = (props) => {
+
+    let date = new Date()
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let fullYear = `${month}-${day}-${year}`
+
     const [newTitle, setNewTitle] = useState('')
     const [newDescription, setNewDescription] = useState('')
     const [newDueDate, setNewDueDate] = useState('')
     const [newPriority, setNewPriority] = useState('Low')
+    const [todaysDate, setTodaysDate] = useState(fullYear)
+    const [validTitle, setValidTitle] = useState(false)
 
     const titleChangeHandler = (event) => {
         setNewTitle(event.target.value)
+        setValidTitle(true)
     }
 
     const descriptionChangeHandler = (event) => {
@@ -23,6 +33,15 @@ const TodoForm = (props) => {
         console.log(event.target.value)
     }
 
+    const validateTitleHandler = () => {
+        if (newTitle !== "") {
+            setValidTitle(true)
+        } else {
+            setValidTitle(false)
+            setNewTitle("Title cannot be empty")
+        }
+    }
+
     const submitHandler = (event) => {
         event.preventDefault()
 
@@ -33,11 +52,26 @@ const TodoForm = (props) => {
             priority: newPriority
         }
 
-        props.onSaveTodo(newTodo)
-        setNewTitle('')
-        setNewDescription('')
-        setNewDueDate('')
-        setNewPriority('Low')
+        validateTitleHandler()
+
+        if (validTitle) {
+            props.onSaveTodo(newTodo)
+            setNewTitle('')
+            setNewDescription('')
+            setNewDueDate('')
+            setNewPriority('Low')
+            setValidTitle(false)
+        }
+    }
+
+    const handleTodaysDate = () => {
+        let date = new Date()
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        setTodaysDate(`${year}-${month}-${day}`.toString())
+
+        console.log(todaysDate)
     }
 
     return (
@@ -53,7 +87,7 @@ const TodoForm = (props) => {
                 </div>
                 <div className='new-todo__control'>
                     <label>Due Date</label>
-                    <input type="date" value={newDueDate} min="2022-12-05" onChange={dateChangeHandler} />
+                    <input type="date" value={newDueDate} onClick={handleTodaysDate} min={"2022-12-06"} onChange={dateChangeHandler} />
                 </div>
                 <div className='new-todo__control'>
                     <label>Priority</label>
