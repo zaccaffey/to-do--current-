@@ -8,25 +8,29 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
+import './Todo/TodoItem.css'
 
 const initialList = [
     {
         title: "Clean the car",
         description: "I need to vaccum my car before 5 pm.",
         date: new Date("12/13/2022"),
-        id: Math.random().toString()
+        id: Math.random().toString(),
+        priority: "High"
     },
     {
         title: "Wash the dog",
         description: "I need to give Indy a bath before the end of the day.",
         date: new Date("1/13/2023"),
-        id: Math.random().toString()
+        id: Math.random().toString(),
+        priority: "Medium"
     },
     {
         title: "Grocery Shopping",
         description: "I need to pickup milk.",
         date: new Date("1/03/2023"),
-        id: Math.random().toString()
+        id: Math.random().toString(),
+        priority: "Low"
     },
 ]
 const Home = () => {
@@ -35,6 +39,7 @@ const Home = () => {
     const [newTitle, setNewTitle] = useState('')
     const [newDescription, setNewDescription] = useState('')
     const [newDueDate, setNewDueDate] = useState('')
+    const [newPriority, setNewPriority] = useState('')
     const [myId, setMyId] = useState('')
     const [myObject, setMyObject] = useState('')
 
@@ -49,6 +54,10 @@ const Home = () => {
     const dateChangeHandler = (event) => {
         setNewDueDate(event.target.value)
         console.log(newDueDate)
+    }
+
+    const priorityChangeHandler = (event) => {
+        setNewPriority(event.target.value)
     }
 
     const addTodoHandler = (todo) => {
@@ -86,6 +95,7 @@ const Home = () => {
         newList[index].title = newTitle
         newList[index].description = newDescription
         newList[index].date = newDueDate
+        newList[index].priority = newPriority
         setTodos(newList)
         setOpen(false) 
         setNewTitle('')
@@ -122,6 +132,9 @@ const Home = () => {
     
                                     <DialogContentText>Due Date</DialogContentText>
                                     <textarea type="text" value={newDueDate} onChange={dateChangeHandler} placeholder={myObject.date}></textarea>
+
+                                    <DialogContentText>Priority</DialogContentText>
+                                    <input type="text" value={newPriority} onChange={priorityChangeHandler} placeholder={myObject.priority}></input>
                                 </div>
                                 <div>
                                     <button type="submit">Submit</button>

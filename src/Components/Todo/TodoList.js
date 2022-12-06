@@ -2,6 +2,7 @@ import TodoItem from "./TodoItem"
 // import { v4 as uuidv4 } from 'uuid';
 import React, { useState } from "react"
 import Col from 'react-bootstrap/Col';
+import './TodoItem.css'
 const TodoList = (props) => {
 
     const removeTodoHandler = (id) => {
@@ -19,7 +20,7 @@ const TodoList = (props) => {
     }
 
     return (
-        <div>
+        <div className="cards">
             <Col>
                 {props.list.map(todo => (
                     <div>

@@ -5,6 +5,18 @@
     margin-bottom: 1rem;
     text-align: left;
   }
+
+  .new-todo__controls label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .new-todo__radio {
+    margin: auto;
+    text-align: left;
+    vertical-align: middle;
+  }
   
   .new-todo__control label {
     font-weight: bold;
@@ -20,7 +32,22 @@
     width: 20rem;
     max-width: 100%;
   }
+
+  .new-todo__control select {
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 20rem;
+    max-width: 100%;
+  }
   
   .new-todo__actions {
     text-align: right;
   }
+
+  input[type='radio']{   
+    vertical-align: baseline;
+    padding: 10px;
+    margin: 10px;
+ }
