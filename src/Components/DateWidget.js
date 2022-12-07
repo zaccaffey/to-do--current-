@@ -10,7 +10,7 @@ const DateWidget = (props) => {
     }
         return (
             <div>
-                <p>{date}</p>
+                <p>Due Date: {date}</p>
             </div>
         );
 }

@@ -38,7 +38,7 @@ const TodoForm = (props) => {
             setValidTitle(true)
         } else {
             setValidTitle(false)
-            setNewTitle("Title cannot be empty")
+            setNewTitle("* Title cannot be empty")
         }
     }
 
@@ -87,7 +87,7 @@ const TodoForm = (props) => {
                 </div>
                 <div className='new-todo__control'>
                     <label>Due Date</label>
-                    <input type="date" value={newDueDate} onClick={handleTodaysDate} min={"2022-12-06"} onChange={dateChangeHandler} />
+                    <input type="date" value={newDueDate} onClick={handleTodaysDate} min={"2022-12-07"} onChange={dateChangeHandler} />
                 </div>
                 <div className='new-todo__control'>
                     <label>Priority</label>

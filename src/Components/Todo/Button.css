@@ -2,12 +2,12 @@
 .button-29 {
   align-items: center;
   appearance: none;
-  background: radial-gradient(#76b2fe, #5557D2);
+  background-color: #495579;
   border: 0;
   border-radius: 6px;
   box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
   box-sizing: border-box;
-  color: #000000;
+  color: #FFFBEB;
   cursor: pointer;
   display: inline-flex;
   font-family: "JetBrains Mono",monospace;

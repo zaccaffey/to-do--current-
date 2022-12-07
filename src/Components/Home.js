@@ -8,7 +8,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
-import './Todo/TodoItem.css'
+import './NewTodo/TodoForm.css';
 
 const initialList = []
 
@@ -41,7 +41,9 @@ const Home = () => {
 
     const addTodoHandler = (todo) => {
         setTodos((prevList) => {
-            return [todo, ...prevList]
+            let temp = [todo, ...prevList]
+            console.log(typeof todo.date)
+            return [...temp].sort((a, b) => a.date > b.date ? 1 : -1)
         })
     }
 
@@ -76,8 +78,10 @@ const Home = () => {
         newList[index].description = newDescription
         newList[index].date = newDueDate
         newList[index].priority = newPriority
-        setTodos(newList)
-        setOpen(false) 
+        setTodos((prevList) => {
+            return [...newList].sort((a, b) => a.date > b.date ? 1 : -1)
+        })
+        setOpen(false)
         setNewTitle('')
         setNewDescription('')
         setNewDueDate('')
@@ -99,33 +103,40 @@ const Home = () => {
         <Container>
             <Row>
                 <Col>
-                    <h1>To-Do List</h1>
+                    <div className="new-todo-title">
+                        <h1>To-Do List</h1>
+                    </div>
                     <div>
-                        <NewTodo onAddTodo={addTodoHandler}/>
+                        <NewTodo onAddTodo={addTodoHandler} />
                         <TodoList list={todos} onRemoveTodo={removeTodo} editClickToOpen={handleClickToOpen} getId={getId}></TodoList>
                     </div>
                     <Dialog open={open} onClose={handleToClose}>
-                        <DialogTitle>Edit Item</DialogTitle>
-                        <DialogContent>
-                            <form onSubmit={submitHandler}>
-                                <div>
-                                    <DialogContentText>Title</DialogContentText>
-                                    <input type="text" value={newTitle} onChange={titleChangeHandler} placeholder={myObject.title} on></input>
-                                   
-                                    <DialogContentText>Description</DialogContentText>
+                        <div className='new-todo'>
+                            <DialogTitle>Edit Item</DialogTitle>
+                            <DialogContent>
+                                <form onSubmit={submitHandler}>
+                                    <DialogTitle>Title</DialogTitle>
+                                    <textarea type="text" value={newTitle} onChange={titleChangeHandler} placeholder={myObject.title} on></textarea>
+
+                                    <DialogTitle>Description</DialogTitle>
                                     <textarea type="text" value={newDescription} onChange={descriptionChangeHandler} placeholder={myObject.description}></textarea>
-    
-                                    <DialogContentText>Due Date</DialogContentText>
+
+                                    <DialogTitle>Due Date</DialogTitle>
                                     <textarea type="text" value={newDueDate} onChange={dateChangeHandler} placeholder={myObject.date}></textarea>
 
-                                    <DialogContentText>Priority</DialogContentText>
-                                    <input type="text" value={newPriority} onChange={priorityChangeHandler} placeholder={myObject.priority}></input>
-                                </div>
-                                <div>
-                                    <button type="submit">Submit</button>
-                                </div>
-                            </form>
-                        </DialogContent>
+                                    <DialogTitle>Priority</DialogTitle>
+                                    <select value={newPriority} select={myObject.priority} onChange={priorityChangeHandler}>
+                                        <option value="High">High</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Low">Low</option>
+                                    </select>
+                                    {'\n'}
+                                    <Row>
+                                        <button type="submit">Submit</button>
+                                    </Row>
+                                </form>
+                            </DialogContent>
+                        </div>
                     </Dialog>
                 </Col>
             </Row>
