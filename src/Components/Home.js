@@ -5,7 +5,6 @@ import TodoList from './Todo/TodoList';
 import React, { useState } from 'react';
 import NewTodo from './NewTodo/NewTodo';
 import Dialog from "@material-ui/core/Dialog";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import './NewTodo/TodoForm.css';
@@ -78,9 +77,8 @@ const Home = () => {
         newList[index].description = newDescription
         newList[index].date = newDueDate
         newList[index].priority = newPriority
-        setTodos((prevList) => {
-            return [...newList].sort((a, b) => a.date > b.date ? 1 : -1)
-        })
+        setTodos(newList)
+        console.log(newList)
         setOpen(false)
         setNewTitle('')
         setNewDescription('')
@@ -130,9 +128,10 @@ const Home = () => {
                                         <option value="Medium">Medium</option>
                                         <option value="Low">Low</option>
                                     </select>
-                                    {'\n'}
                                     <Row>
-                                        <button type="submit">Submit</button>
+                                        <div className='new-todo__actions'>
+                                            <button type="submit">Submit</button>
+                                        </div>
                                     </Row>
                                 </form>
                             </DialogContent>
