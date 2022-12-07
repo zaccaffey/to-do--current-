@@ -99,7 +99,7 @@ const TodoForm = (props) => {
                 </div>
             </div>
             <div className='new-todo__actions'>
-                <button type='submit'>Add Todo</button>
+                <button type='submit'>Add</button>
             </div>
         </form>
     )
