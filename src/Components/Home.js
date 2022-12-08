@@ -2,24 +2,34 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import TodoList from './Todo/TodoList';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NewTodo from './NewTodo/NewTodo';
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import './NewTodo/TodoForm.css';
 
-const initialList = []
-
 const Home = () => {
 
-    const [todos, setTodos] = useState(initialList)
+    const [todos, setTodos] = useState([])
     const [newTitle, setNewTitle] = useState('')
     const [newDescription, setNewDescription] = useState('')
     const [newDueDate, setNewDueDate] = useState('')
     const [newPriority, setNewPriority] = useState('')
     const [myId, setMyId] = useState('')
     const [myObject, setMyObject] = useState('')
+
+    useEffect(() => {
+        load()
+    }, []);
+
+    const load = () => fetch('/todos', {
+        method: 'GET'
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        setTodos(data)
+    })
 
     const titleChangeHandler = (event) => {
         setNewTitle(event.target.value)
@@ -39,20 +49,36 @@ const Home = () => {
     }
 
     const addTodoHandler = (todo) => {
-        setTodos((prevList) => {
-            let temp = [todo, ...prevList]
-            console.log(typeof todo.date)
-            return [...temp].sort((a, b) => a.date > b.date ? 1 : -1)
+        fetch('/todos', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "title": todo.title, "description": todo.description, "date": todo.date, "priority": todo.priority })
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            setTodos((prevList) => {
+                let temp = [todo, ...prevList]
+                return [...temp].sort((a, b) => a.date > b.date ? 1 : -1)
+            })
         })
     }
 
     const removeTodo = (id) => {
-        let newList = [...todos]
-
-        let item = newList.find(element => element.id === id)
-        let index = newList.indexOf(item)
-        newList.splice(index, 1)
-        setTodos(newList)
+        fetch('/todos/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(function (data) {
+            let newList = [...todos]
+            let item = newList.find(element => element.id === id)
+            let index = newList.indexOf(item)
+            newList.splice(index, 1)
+            setTodos(newList)
+        })
     }
 
     const [open, setOpen] = React.useState(false);
@@ -67,22 +93,25 @@ const Home = () => {
 
     const submitHandler = (event) => {
         event.preventDefault()
-
-        let newList = [...todos]
         let id = myId
-        let item = newList.find(element => element.id === id)
-        let index = newList.indexOf(item)
+        console.log("id " + myId)
 
-        newList[index].title = newTitle
-        newList[index].description = newDescription
-        newList[index].date = newDueDate
-        newList[index].priority = newPriority
-        setTodos(newList)
-        console.log(newList)
-        setOpen(false)
-        setNewTitle('')
-        setNewDescription('')
-        setNewDueDate('')
+        fetch('/todos/' + id, {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "title": newTitle, "description": newDescription, "date": newDueDate, "priority": newPriority })
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            load()
+            setOpen(false)
+            setNewTitle('')
+            setNewDescription('')
+            setNewDueDate('')
+        })
     }
 
     const getId = (id) => {
@@ -90,7 +119,6 @@ const Home = () => {
         let item = newList.find(element => element.id === id)
         setMyObject(item)
         setMyId(id)
-
         setNewTitle(item.title)
         setNewDescription(item.description)
         setNewDueDate(item.date)

@@ -48,7 +48,7 @@ const TodoForm = (props) => {
         const newTodo = {
             title: newTitle,
             description: newDescription,
-            date: new Date(newDueDate.replace(/-/g, '/').replace(/T.+/, '')),
+            date: newDueDate,
             priority: newPriority
         }
 
