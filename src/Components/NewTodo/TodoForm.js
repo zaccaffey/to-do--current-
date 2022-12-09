@@ -69,7 +69,8 @@ const TodoForm = (props) => {
         let day = date.getDate();
         let month = date.getMonth() + 1;
         let year = date.getFullYear();
-        setTodaysDate(`${year}-${month}-${day}`.toString())
+        let strDate = `${year}-${month}-${day}`.toString()
+        setTodaysDate(strDate)
 
         console.log(todaysDate)
     }

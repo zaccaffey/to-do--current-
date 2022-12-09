@@ -55,7 +55,7 @@ const Home = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "title": todo.title, "description": todo.description, "date": todo.date, "priority": todo.priority })
+            body: JSON.stringify({"title": todo.title, "description": todo.description, "date": todo.date, "priority": todo.priority })
         }).then(function (response) {
             return response.json();
         }).then(function (data) {
@@ -67,6 +67,7 @@ const Home = () => {
     }
 
     const removeTodo = (id) => {
+        console.log(id)
         fetch('/todos/' + id, {
             method: 'DELETE',
             headers: {
@@ -102,10 +103,11 @@ const Home = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "title": newTitle, "description": newDescription, "date": newDueDate, "priority": newPriority })
+            body: JSON.stringify({"title": newTitle, "description": newDescription, "date": newDueDate, "priority": newPriority })
         }).then(function (response) {
             return response.json();
         }).then(function (data) {
+            console.log(data)
             load()
             setOpen(false)
             setNewTitle('')
